@@ -19,16 +19,16 @@
 			</tr>
 			<tr>
 					<th>학생이름</td>
-					<td><input type="text" name="sname" value="std2"></td>
+					<td><input type="text" name="name" value="std2"></td>
 			</tr>
 			<tr>
 					<th>학생비밀번호</th>
-					<td><input type="password" name="spass" value="std3"></td>
+					<td><input type="password" name="pass" value="std3"></td>
 			</tr>
 			<tr>
 					<th>학생전공</th>
 					<td>
-						<select name="sdept">
+						<select name="dept">
 							<option disabled>선택하세요</option>
 							<option value"경영학과">경영학과</option>
 							<option value"컴퓨터공학과">컴퓨터공학과</option>
@@ -39,7 +39,7 @@
 			</tr>
 			<tr>
 					<th>학생생년원일</td>
-					<td><input type="date" name="sbirth"></td>
+					<td><input type="date" name="birth" value="2000-01-01"></td>
 										
 			</tr>
 			<tr>
@@ -51,42 +51,39 @@
 	</table>
 	<hr>
 	<div id="show">
-			<!-- Trigger/Open The Modal -->
-				<button id="myBtn">Open Modal</button>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>아이디</th>
+					<th>이름</th>
+					<th>전공</th>
+					<th>생년원일</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+			<tbody id="list"></tbody>
+		</table>
+	</div>
+		<!-- The Modal -->
+	<div id="myModal" class="modal">
 				
-				<!-- The Modal -->
-		<div id="myModal" class="modal">
-				
-				  <!-- Modal content -->
+			<!-- Modal content -->
 			<div class="modal-content">
 			<div class="modal-header">
 				<span class="close">&times;</span>
 				<h2>Modal Header</h2>
 				</div>
 			<div class="modal-body">
-			    <p><input type="text" name"pass"></p>
-			    <p><input type="text" name"name"></p>
-			    <p><input type="date" name"birth"></p>
+				<input type="hidden" id="sid">
+			    <p>비밀번호<input type="text" id="pass" ></p>
+			    <p>이름<input type="text" id="name"></p>
+			    <p>생년원일<input type="date" id="birth"></p>
 			</div>
 			<div class="modal-footer">
-				<h3><button>수정</button></h3>
+				<button id="modBtn">수정</button>
 			</div>
 	 	</div>
-		<table border="1">
-			<thead>
-				<tr>
-					<th>아이디</th>
-					<th>이름</th>
-					<th>학과</th>
-					<th>생년원일</th>
-					<th>삭제</th>
-				</tr>
-			</thead>
-			<tbody id="list">
-
-			</tbody>
-		</table>
-	</div>
+	 </div>
 	<script>
 		
 	</script>

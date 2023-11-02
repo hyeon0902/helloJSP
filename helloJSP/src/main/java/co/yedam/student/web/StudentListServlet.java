@@ -2,7 +2,6 @@ package co.yedam.student.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.List;
 

@@ -29,7 +29,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public StudentVO getStudent(String sid) {
-		return getStudent(sid);
+		return dao.select(sid);
 	}
 	
 }

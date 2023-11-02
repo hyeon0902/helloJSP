@@ -40,8 +40,8 @@ public class StudentDAO {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getStudentId());
 			psmt.setString(2, vo.getStudentName());
-			psmt.setString(3, vo.getStudentPassword());
-			psmt.setString(4, vo.getStudentDept());
+			psmt.setString(4, vo.getStudentPassword());
+			psmt.setString(3, vo.getStudentDept());
 			psmt.setString(5, sdf.format(vo.getStudentBirthday()));
 			int r = psmt.executeUpdate();
 			return r;
@@ -57,18 +57,17 @@ public class StudentDAO {
 	// 수정: update
 	public int update(StudentVO vo) {
 		int cnt = 0;
-		String sql = "UPDATE STUDENT SET STUDENT_NAME = ?, STUDENT_PASSWORD = ?, STUDENT_DEPT = ?, STUDENT_BIRTHDAY = ? "
+		String sql = "UPDATE STUDENT SET STUDENT_NAME = ?, STUDENT_PASSWORD = ?, STUDENT_BIRTHDAY = ? "
 				   + "WHERE STUDENT_ID = ?";
 		conn = ds.getConnection();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(5, vo.getStudentId());
+			psmt.setString(4, vo.getStudentId());
 			psmt.setString(1, vo.getStudentName());
 			psmt.setString(2, vo.getStudentPassword());
-			psmt.setString(3, vo.getStudentDept());
-			psmt.setString(4, sdf.format(vo.getStudentBirthday()));
+			psmt.setString(3, sdf.format(vo.getStudentBirthday()));
 			
 			cnt = psmt.executeUpdate();
 			

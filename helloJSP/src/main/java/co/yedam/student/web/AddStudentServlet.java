@@ -20,8 +20,13 @@ import co.yedam.student.serviceImpl.StudentServiceImpl;
 public class AddStudentServlet extends HttpServlet {
 	// init -> service -> destroy
 
+		
+	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// 한글처리
+		req.setCharacterEncoding("utf-8");
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		
