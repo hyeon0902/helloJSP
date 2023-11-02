@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Stduent/StudentInfo.html</title>
+	<link rel="stylesheet" href="../css/MyStyle.css">
+</head>
+
+<body>
+	<table border="1">
+		<thead>
+			<h3>학생정보입력</h3>			
+		</thead>
+		<tbody>
+			<tr>
+					<th>학생아이디</th>
+					<td><input type="text" name="sid" value="std1"></td>
+			</tr>
+			<tr>
+					<th>학생이름</td>
+					<td><input type="text" name="sname" value="std2"></td>
+			</tr>
+			<tr>
+					<th>학생비밀번호</th>
+					<td><input type="password" name="spass" value="std3"></td>
+			</tr>
+			<tr>
+					<th>학생전공</th>
+					<td>
+						<select name="sdept">
+							<option disabled>선택하세요</option>
+							<option value"경영학과">경영학과</option>
+							<option value"컴퓨터공학과">컴퓨터공학과</option>
+							<option value"서양학과">서양학과</option>
+							<option value"영문학과">영문학과</option>
+						</select>
+					</td>
+			</tr>
+			<tr>
+					<th>학생생년원일</td>
+					<td><input type="date" name="sbirth"></td>
+										
+			</tr>
+			<tr>
+					<td colspan="2" align="center">
+						<button id="addBtn">등록</button>
+					</td>								
+			</tr>			
+		</tbody>
+	</table>
+	<hr>
+	<div id="show">
+			<!-- Trigger/Open The Modal -->
+				<button id="myBtn">Open Modal</button>
+				
+				<!-- The Modal -->
+		<div id="myModal" class="modal">
+				
+				  <!-- Modal content -->
+			<div class="modal-content">
+			<div class="modal-header">
+				<span class="close">&times;</span>
+				<h2>Modal Header</h2>
+				</div>
+			<div class="modal-body">
+			    <p><input type="text" name"pass"></p>
+			    <p><input type="text" name"name"></p>
+			    <p><input type="date" name"birth"></p>
+			</div>
+			<div class="modal-footer">
+				<h3><button>수정</button></h3>
+			</div>
+	 	</div>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>아이디</th>
+					<th>이름</th>
+					<th>학과</th>
+					<th>생년원일</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+			<tbody id="list">
+
+			</tbody>
+		</table>
+	</div>
+	<script>
+		
+	</script>
+	<script src="../js/student.js"></script>
+</body>
+
+</html>
