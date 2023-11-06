@@ -1,15 +1,14 @@
 package co.yedam.board.web;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.yedam.board.service.BoardService;
+import co.yedam.board.service.BoardVO;
 import co.yedam.board.serviceImpl.BoardServiceImpl;
 import co.yedam.common.Command;
 
-public class RemoveBoardControl implements Command {
+public class RemoveFormControl implements Command {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -17,18 +16,15 @@ public class RemoveBoardControl implements Command {
 		
 		BoardService svc = new BoardServiceImpl();
 		
-		if (svc.removeBoard(Integer.parseInt(bno))) {
-			try {
-				resp.sendRedirect("boardList.do");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}else {
-			try {
-				resp.sendRedirect("removeBoard.do");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		BoardVO vo = svc.getBoard(Integer.parseInt(bno));
+		
+		req.setAttribute("vo", vo);
+		
+		try {
+			req.getRequestDispatcher("WEB-INF/board/removeForm.jsp").forward(req, resp);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
+
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.yedam.board.service.BoardVO;
+import co.yedam.board.service.MemberVO;
 import co.yedam.common.DataSource;
 
 public class BoardDAO {
@@ -30,16 +31,18 @@ public class BoardDAO {
 	}
 
 	public int insert(BoardVO vo) {
-		String sql = "INSERT INTO BOARD (BOARD_NO, TITLE, CONTENT, WRITER) VALUES (SEQ_BOARD.NEXTVAL, ?, ?, ?)";
+		String sql = "INSERT INTO BOARD (BOARD_NO, TITLE, CONTENT, WRITER, IMAGE) VALUES (SEQ_BOARD.NEXTVAL, ?, ?, ?, ?)";
 		conn = ds.getConnection();
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getTitle());
 			psmt.setString(2, vo.getContent());
 			psmt.setString(3, vo.getWriter());
+			psmt.setString(4, vo.getImage());
 
 			int r = psmt.executeUpdate();
 			return r;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -49,23 +52,24 @@ public class BoardDAO {
 	}
 
 	public int update(BoardVO vo) {
-		String sql = "UPDATE BOARD SET TITLE = ?, CONTENT = ?, IMAGE = NVL(?, IMAGE), LAST_UPDATE = SYSDATE WHERE BOARD_NO = ?";
+		String sql = "UPDATE BOARD SET TITLE = ?, WRITER = ?, CONTENT = ?,  IMAGE = NVL(?, IMAGE), LAST_UPDATE = SYSDATE WHERE BOARD_NO = ?";
 		conn = ds.getConnection();
+		int r = 0;
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, vo.getTitle());
-			psmt.setString(2, vo.getContent());
-			psmt.setString(3, vo.getImage());
-			psmt.setInt(4, vo.getBoardNo());
+			psmt.setString(2, vo.getWriter());
+			psmt.setString(3, vo.getContent());
+			psmt.setString(4, vo.getImage());
+			psmt.setInt(5, vo.getBoardNo());
 
-			int r = psmt.executeUpdate();
-			return r;
+			r = psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close();
 		}
-		return 0;
+		return r;
 	}
 
 	public int delete(int boardNo) {
@@ -142,6 +146,8 @@ public class BoardDAO {
 		return null;
 	}
 	
+	// 조회수 증가
+	
 	public int updateCnt(int boardNo) {
 		String sql = "UPDATE BOARD SET VIEW_CNT = VIEW_CNT + 1 WHERE BOARD_NO = ?";
 		conn = ds.getConnection();
@@ -157,6 +163,58 @@ public class BoardDAO {
 			close();
 		}
 		return 0;
+	}
+
+	// 아이디/ 비번 => 조회값 boolean.
+	public MemberVO getUser(String id, String pw) {
+		String sql = "SELECT * FROM MEMBER WHERE MID=? AND PASS=?";
+		conn = ds.getConnection();
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			psmt.setString(2, pw);
+			MemberVO vo = new MemberVO();
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				vo.setMid(rs.getString("MID"));
+				vo.setName(rs.getString("NAME"));
+				vo.setPhone(rs.getString("PHONE"));
+				vo.setResponsbility(rs.getString("RESPONSBILITY"));
+				return vo;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return null;
+	}
+	
+	public List<MemberVO> memberlist() {
+		List<MemberVO> members = new ArrayList<>();
+		MemberVO vo;
+		String sql = "SELECT * FROM MEMBER ORDER BY MID";
+		conn = ds.getConnection();
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				vo = new MemberVO();
+				vo.setMid(rs.getString("MID"));
+				vo.setPass(rs.getString("PASS"));
+				vo.setName(rs.getString("NAME"));
+				vo.setPhone(rs.getString("PHONE"));
+				vo.setResponsbility(rs.getString("RESPONSIBILITY"));
+				members.add(vo);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return members;
 	}
 
 }
